@@ -10,16 +10,9 @@ namespace ZPO
     {
         static void Main(string[] args)
         {            
-            //Console.WriteLine("Hello World!");
-
-            //string fileName = "D:\\VisualStudio\\ZPO\\ZPO\\TextFile.txt";
-
            // var tableRead = File.ReadAllLines(fileName);
             //var tableToSort = new List<T>(tableRead);
-
             //FileReader.Read(fileName);
-
-            var tab = new[] { 2, 543, 61, 123432, 4315, 140, -12, 3425, 2344, 53 };
             List<string> stringList = new List {
                 "adsf",
                 "adsfl;jkadsf",
@@ -28,33 +21,75 @@ namespace ZPO
                 ";ljsdfqweroiusd",
                 "zcxv,mnzxcvnm,k"
             };
-            IList<string> sortedString = stringList.cs(w => w.Length);
 
-            foreach (var i in tab)
-                Console.Write( i + ", ");
+            int wieloscZbiru = 10000;
 
-            SortArray(tab);
-
-            Console.WriteLine();
-            foreach (var i in tab)
-                Console.Write( i + " ");
-
-            foreach (string s in sortedString)
-                Console.WriteLine(s);
+            Console.WriteLine("Sortowanie bąbelkowe: ");
             DateTime start = DateTime.Now;
-            TestSort(10000000);
+            TestBubble(wieloscZbiru);
             DateTime end = DateTime.Now;
-            Console.WriteLine($"Czas wykonania: {(end - start).TotalSeconds} s");
+            Console.WriteLine($"\nCzas wykonania: {(end - start).TotalSeconds} s");
+            Console.WriteLine($"Czas CPU: {Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds} s");
+
+            Console.WriteLine("\nSortowanie przez wybór: ");
+            start = DateTime.Now;
+            TestSelection(wieloscZbiru);
+            end = DateTime.Now;
+            Console.WriteLine($"\nCzas wykonania: {(end - start).TotalSeconds} s");
+            Console.WriteLine($"Czas CPU: {Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds} s");
+
+            Console.WriteLine("\nSortowanie szybkie: ");
+            start = DateTime.Now;
+            TestQuick(wieloscZbiru);
+            end = DateTime.Now;
+            Console.WriteLine($"\nCzas wykonania: {(end - start).TotalSeconds} s");
+            Console.WriteLine($"Czas CPU: {Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds} s");
+
+            Console.WriteLine("\nSortowanie przez scalanie: ");
+            start = DateTime.Now;
+            TestMerge(wieloscZbiru);
+            end = DateTime.Now;
+            Console.WriteLine($"\nCzas wykonania: {(end - start).TotalSeconds} s");
             Console.WriteLine($"Czas CPU: {Process.GetCurrentProcess().TotalProcessorTime.TotalSeconds} s");
         }
 
-        private static void SortArray<T>(T[] array) where T : IComparable
+        private static void TestBubble(int n)
         {
-            QuickSort.qs(array, 0, array.Length - 1);
-            //CountingSort.cs(array => array.Lenght);
+            Random rand = new Random(12345);
+            float[] tab = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                tab[i] = (float)(rand.NextDouble() * 10);
+            }
+            tab.BubbleSorting();
+            //foreach (var i in tab)
+            //    Console.Write($"{i} ");
         }
-
-        private static void TestSort(int n)
+        private static void TestSelection(int n)
+        {
+            Random rand = new Random(12345);
+            float[] tab = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                tab[i] = (float)(rand.NextDouble() * 10);
+            }
+            tab.SelectionSorting();
+            //foreach (var i in tab)
+            //    Console.Write($"{i} ");
+        }
+        private static void TestQuick(int n)
+        {
+            Random rand = new Random(12345);
+            float[] tab = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                tab[i] = (float)(rand.NextDouble() * 10);
+            }
+            tab.QuickSorting();
+            //foreach (var i in tab)
+            //    Console.Write($"{i} ");
+        }
+        private static void TestMerge(int n)
         {
             Random rand = new Random(12345);
             float[] tab = new float[n];

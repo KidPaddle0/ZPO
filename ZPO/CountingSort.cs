@@ -5,37 +5,17 @@ using System.Text;
 
 namespace ZPO
 {
-    public static class CountingSort
+    public class CountingSort<T> : ISortMetod<T>
+        where T : IComparable<T>
     {
-        public static IList<T> cs<T>(this IList<T> array, Func<T, int> sortProp)
+        public void Sort(IList<T> array)
         {
-            List<int> buckets = new List<int>();
-            for (int i = 0; i < array.Count; i++)
-            {
-                int value = sortProp(array[i]);
-
-                for (int j = buckets.Count; j <= value; j++)
-                    buckets.Add(0);
-                
-                buckets[value]++;
-            }
-
-            int[] startIndex = new int[buckets.Count];
-            for (int j = 1; j < startIndex.Length; j++)
-            {
-                startIndex[j] = buckets[j - 1] + startIndex[j - 1];
-            }
-
-            T[] result = new T[array.Count];
-            for (int i = 0; i < array.Count; i++)
-            {
-                int value = sortProp(array[i]);
-                int desIndex = startIndex[value]++;
-                result[desIndex] = array[i];
-            }
-
-
-            return result;
+            List<T> coppy = new List<T>(array);
+            cs(array);
+        }
+        public static void cs<T>(IList<T> array)
+        {
+           /*.... */
         }
     }
 }

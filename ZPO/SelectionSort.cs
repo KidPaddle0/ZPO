@@ -4,22 +4,23 @@ using System.Text;
 
 namespace ZPO
 {
-    class SelectionSort
+    public class SelectionSort<T>: ISortMetod<T>
+        where T : IComparable<T>
     {
-/*        public void ss(IList<T> array)
+        public void Sort(IList<T> array)
         {
             List<T> coppy = new List<T>(array);
             ss(array);
-        }*/
-        public void ss<T>(T[] array) where T : IComparable
+        }
+        public void ss<T>(IList<T> array) where T : IComparable<T>
         {
-            int n = array.Length;
-            for (int i = 0; i < array.Length - 1; i++)
+            int n = array.Count;
+            for (int i = 0; i < array.Count - 1; i++)
             {
                 T min = array[i];
                 int minLoc = i;
 
-                for (int j = i + 1; j < array.Length; j++)
+                for (int j = i + 1; j < array.Count; j++)
                 {
                     if (array[j].CompareTo(min) < 0)
                     {

@@ -10,7 +10,12 @@ namespace ZPO
     public class BubbleSort<T> : ISortMetod<T>
         where T : IComparable<T>
     {
-       public void Sort(IList<T> array)
+        public void Sort(IList<T> array)
+        {
+            List<T> coppy = new List<T>(array);
+            bs(array);
+        }
+       public void bs(IList<T> array)
        { 
             for(int i = array.Count-1; i > 0; i--)
             {
